@@ -1,19 +1,15 @@
-import express from 'express';
-import cors from 'cors';
-//import dotenv from 'dotenv';
+import dotenv from 'dotenv';
+import connectDB from './db/db_index'
+dotenv.config();
+import { app } from './app'
 
-//dotenv.config();
+connectDB()
+    .then(async () => {
+        app.listen(process.env.PORT || 3000, () => {
+            console.log(`server is running at ${process.env.PORT}`);
+        })
+    })
+    .catch((error) => {
+        console.error("db connection failed", error);
+    })
 
-const app = express();
-const PORT = 5000;
-
-app.use(cors());
-app.use(express.json());
-
-app.get('/api/health', (req, res) => {
-    res.json({ message: 'API is running!' });
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
