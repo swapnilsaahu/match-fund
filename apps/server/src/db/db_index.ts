@@ -1,21 +1,15 @@
 import dotenv from "dotenv";
 import { Pool } from "pg";
 dotenv.config();
-const dbConfig = {
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: parseInt(process.env.DB_PORT),
 
-    // Pool configuration
-    max: 20,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
-};
 
-const pool = new Pool(dbConfig);
-pool.on('error', (err) => {
+const pool = new Pool({
+    connectionString: process.env.CONNECTION_STRING_URL,
+    ssl: {
+        rejectUnauthorized: false, // required for Neon in most cases
+    },
+});
+pool.on('error', (err: Error) => {
     console.error('error while connecting to pool', err);
     process.exit(1);
 });
