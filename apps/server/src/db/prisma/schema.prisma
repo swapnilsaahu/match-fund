@@ -15,5 +15,11 @@ datasource db {
 }
 
 model User {
-    email String @unique
+    id           String   @id @default(nanoid())
+    firstname    String
+    lastname     String
+    email        String   @unique
+    password     String
+    createdAt    DateTime @default(now())
+    refreshToken String?
 }
