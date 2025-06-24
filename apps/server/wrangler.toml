@@ -1,0 +1,120 @@
+# Cloudflare Workers Configuration
+name = "match-fund-backend-api"
+main = "dist/index.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Build configuration
+[build]
+command = "npm run build"
+
+# Environment variables for production
+[vars]
+NODE_ENV = "production"
+API_VERSION = "v1"
+
+# Development environment
+[env.development]
+name = "match-fund-backend-api-dev"
+vars = { NODE_ENV = "development", API_VERSION = "v1" }
+
+# Staging environment
+[env.staging]
+name = "match-fund-backend-api-staging"
+vars = { NODE_ENV = "staging", API_VERSION = "v1" }
+
+# Custom domains (uncomment and configure when ready)
+# [[env.production.routes]]
+# pattern = "api.yourdomain.com/*"
+# zone_name = "yourdomain.com"
+
+# [[env.staging.routes]]
+# pattern = "api-staging.yourdomain.com/*"
+# zone_name = "yourdomain.com"
+
+# D1 Database bindings (uncomment when you add databases)
+# [[env.production.d1_databases]]
+# binding = "DB"
+# database_name = "your-production-db"
+# database_id = "your-database-id"
+
+# [[env.development.d1_databases]]
+# binding = "DB"
+# database_name = "your-dev-db"
+# database_id = "your-dev-database-id"
+
+# KV Storage bindings (uncomment when you add KV storage)
+# [[env.production.kv_namespaces]]
+# binding = "CACHE"
+# id = "your-kv-namespace-id"
+
+# [[env.development.kv_namespaces]]
+# binding = "CACHE"
+# id = "your-dev-kv-namespace-id"
+
+# R2 Storage bindings (uncomment when you add R2 storage)
+# [[env.production.r2_buckets]]
+# binding = "UPLOADS"
+# bucket_name = "your-uploads-bucket"
+
+# [[env.development.r2_buckets]]
+# binding = "UPLOADS"
+# bucket_name = "your-dev-uploads-bucket"
+
+# Durable Objects (uncomment when you add Durable Objects)
+# [[durable_objects.bindings]]
+# name = "CHAT_ROOM"
+# class_name = "ChatRoom"
+
+# Queue bindings (uncomment when you add Queues)
+# [[env.production.queues.producers]]
+# binding = "EMAIL_QUEUE"
+# queue = "email-processing-queue"
+
+# [[env.production.queues.consumers]]
+# queue = "email-processing-queue"
+# max_batch_size = 10
+# max_batch_timeout = 30
+
+# Analytics Engine bindings (uncomment when you add Analytics)
+# [[env.production.analytics_engine_datasets]]
+# binding = "ANALYTICS"
+# dataset = "your-analytics-dataset"
+
+# Vectorize bindings (uncomment when you add AI/Vector search)
+# [[env.production.vectorize]]
+# binding = "VECTORIZE"
+# index_name = "your-vector-index"
+
+# Browser bindings (uncomment when you add Browser API)
+# [env.production.browser]
+# binding = "BROWSER"
+
+# Hyperdrive bindings (uncomment when you add external database connections)
+# [[env.production.hyperdrive]]
+# binding = "DATABASE"
+# id = "your-hyperdrive-id"
+
+# AI bindings (uncomment when you add Workers AI)
+# [env.production.ai]
+# binding = "AI"
+
+# Limits and resource allocation
+[limits]
+cpu_ms = 50
+
+# Account and zone IDs (fill these in from your Cloudflare dashboard)
+ account_id = "21816a95dd18c1b93a8d8d70f04110c4"
+# zone_id = "your-zone-id"
+
+# Observability
+[observability]
+enabled = true
+
+# Upload rules (exclude unnecessary files)
+[upload]
+format = "service-worker"
+main = "dist/index.js"
+rules = [
+  { type = "ESModule", globs = ["dist/**/*.js"] }
+]

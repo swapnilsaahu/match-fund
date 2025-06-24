@@ -3,9 +3,13 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "dev": "nodemon --exec tsx src/index.ts",
+        "dev": "wrangler dev",
+        "dev:local": "nodemon --exec tsx src/index.ts",
         "build": "tsc",
-        "start": "node dist/index.js",
+        "start": "wrangler deploy",
+        "deploy": "wrangler deploy",
+        "deploy:staging": "wrangler deploy --env staging",
+        "deploy:dev": "wrangler deploy --env development",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
@@ -13,18 +17,19 @@
     "license": "ISC",
     "description": "",
     "devDependencies": {
-        "@types/cors": "^2.8.19",
-        "@types/express": "^5.0.3",
+        "@cloudflare/workers-types": "^4.20250620.0",
         "@types/node": "^24.0.3",
         "dotenv-cli": "^8.0.0",
         "nodemon": "^3.1.10",
         "prisma": "^6.10.1",
-        "tsx": "^4.20.3"
+        "tsx": "^4.20.3",
+        "wrangler": "^4.21.1"
     },
     "dependencies": {
+        "@neondatabase/serverless": "^1.0.1",
+        "@prisma/adapter-neon": "^6.10.1",
         "@prisma/client": "^6.10.1",
-        "cors": "^2.8.5",
         "dotenv": "^16.5.0",
-        "express": "^5.1.0"
+        "hono": "^4.8.2"
     }
 }
