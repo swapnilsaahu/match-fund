@@ -1,20 +1,14 @@
-import dotenv from 'dotenv';
-import prisma from './db/db_index';
-dotenv.config();
-import { app } from './app'
+import { Hono } from "hono";
+import { cors } from "hono/cors"
 
-const startUpServer = async () => {
-    try {
-        await prisma.$connect();
-        console.log('db connnected');
+const app = new Hono();
 
-        app.listen(process.env.PORT || 3000, () => {
-            console.log(`server running at ${process.env.PORT}`)
-        })
-    } catch (err) {
-        console.error("failed to connect to db", err);
-        process.exit(1);
-    }
-}
+app.use('*', cors());
 
-startUpServer();
+
+app.get('/', (c) => {
+    return c.json({ message: 'API is running' })
+
+})
+
+export default app;

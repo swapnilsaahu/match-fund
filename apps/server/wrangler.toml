@@ -1,28 +1,25 @@
 # Cloudflare Workers Configuration
+
 name = "match-fund-backend-api"
-main = "dist/index.js"
+main = "./dist/index.js"  # This should point to the built JS file
 compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
 
-# Build configuration
 [build]
-command = "npm run build"
+command = "npm run build"  # Your build script must compile TypeScript to dist/
 
-# Environment variables for production
-[vars]
-NODE_ENV = "production"
-API_VERSION = "v1"
 
-# Development environment
 [env.development]
 name = "match-fund-backend-api-dev"
 vars = { NODE_ENV = "development", API_VERSION = "v1" }
 
-# Staging environment
+[env.production]
+name = "match-fund-backend-api"  # Optional but for clarity
+vars = { NODE_ENV = "production", API_VERSION = "v1" }
+
 [env.staging]
 name = "match-fund-backend-api-staging"
 vars = { NODE_ENV = "staging", API_VERSION = "v1" }
-
 # Custom domains (uncomment and configure when ready)
 # [[env.production.routes]]
 # pattern = "api.yourdomain.com/*"
@@ -111,10 +108,3 @@ cpu_ms = 50
 [observability]
 enabled = true
 
-# Upload rules (exclude unnecessary files)
-[upload]
-format = "service-worker"
-main = "dist/index.js"
-rules = [
-  { type = "ESModule", globs = ["dist/**/*.js"] }
-]
