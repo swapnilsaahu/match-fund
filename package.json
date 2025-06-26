@@ -1,15 +1,14 @@
 {
     "private": true,
     "scripts": {
-        "build": "turbo run build",
-        "dev": "turbo run dev",
-        "lint": "turbo run lint",
+        "dev:build": "cd apps/server && npm run dev",
+        "dev:web": "cd apps/web && npm run dev",
+        "lint": "eslint . --ext .ts, .tsx",
         "format": "prettier --write \"**/*.{ts,tsx,md}\""
     },
     "devDependencies": {
         "eslint": "^8.57.0",
-        "prettier": "^3.2.5",
-        "turbo": "^2.5.4"
+        "prettier": "^3.2.5"
     },
     "name": "with-vite-react",
     "packageManager": "npm@10.9.2",
