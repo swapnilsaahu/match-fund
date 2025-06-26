@@ -8,7 +8,8 @@ compatibility_flags = ["nodejs_compat"]
 [build]
 command = "npm run build"  # Your build script must compile TypeScript to dist/
 
-
+[vars]
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMDFKWU5GVlI5MjFIS1NOMEVWUUdEQU01MEUiLCJ0ZW5hbnRfaWQiOiJiZmQ5ZTgwNTQxYjRhZTEzYTVhMmEzNTBkNDkxNmMzNzBiYmMzYzg1ZjU4YzY0ZTUyNTVlNzRmMzQ5NjliZDI1IiwiaW50ZXJuYWxfc2VjcmV0IjoiODdhNzYzZmItZDMyYy00N2MwLWE1MTAtYzhjOGNlMDRjOGY2In0.gpssZiQxe7PXPj0PmeOCoPexaGIIJtkN-u4K7G2lSeo"
 [env.development]
 name = "match-fund-backend-api-dev"
 vars = { NODE_ENV = "development", API_VERSION = "v1" }
@@ -97,8 +98,6 @@ vars = { NODE_ENV = "staging", API_VERSION = "v1" }
 # binding = "AI"
 
 # Limits and resource allocation
-[limits]
-cpu_ms = 50
 
 # Account and zone IDs (fill these in from your Cloudflare dashboard)
  account_id = "21816a95dd18c1b93a8d8d70f04110c4"

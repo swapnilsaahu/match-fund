@@ -5,3 +5,5 @@ node_modules
 /src/db/prisma/generated/
 
 .dev.vars
+
+/src/generated/prisma

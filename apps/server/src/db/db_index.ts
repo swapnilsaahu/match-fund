@@ -1,5 +1,12 @@
-import { PrismaClient } from "./prisma/generated";
 
-const prisma = new PrismaClient();
+import { PrismaClient } from '@prisma/client/edge'
+import { withAccelerate } from '@prisma/extension-accelerate'
+import { Env } from '../types/env.d'
 
-export default prisma;
+export const createPrismaClient = (env: Env) => {
+    return new PrismaClient({
+        datasourceUrl: env.DATABASE_URL,
+    }).$extends(withAccelerate())
+}
+
+export type PrismaClientType = ReturnType<typeof createPrismaClient>
